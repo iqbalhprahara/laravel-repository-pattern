@@ -1,0 +1,72 @@
+apps:
+    - name: octane
+      out_file: "/dev/null"
+      error_file: "/dev/null"
+      script: artisan
+      exec_mode: fork
+      interpreter: php
+      interpreter_args:
+          - -d variable_order=EGPCS
+      instances: 1
+      args:
+          - octane:start
+          - --server=swoole
+          - --max-requests=1000
+          - --host=0.0.0.0
+          - --port=80
+          - --rpc-port=6001
+          - --watch
+      watch: false
+      autorestart: true
+      combine_logs: true
+
+    - name: scheduler
+      out_file: "/dev/null"
+      error_file: "/dev/null"
+      script: artisan
+      exec_mode: fork
+      interpreter: php
+      instances: 1
+      args:
+          - schedule:work
+          - --verbose
+          - --no-interaction
+      watch: true
+      ignore_watch:
+          - .devcontainer
+          - .git
+          - ./storage
+          - ./public/hot
+          - ./node_modules
+      combine_logs: true
+
+    - name: horizon
+      out_file: "/dev/null"
+      error_file: "/dev/null"
+      script: artisan
+      exec_mode: fork
+      interpreter: php
+      instances: 1
+      args:
+          - horizon
+      watch: true
+      ignore_watch:
+          - .devcontainer
+          - .git
+          - ./storage
+          - ./public/hot
+          - ./node_modules
+      combine_logs: true
+
+    - name: vite
+      out_file: "/dev/null"
+      error_file: "/dev/null"
+      exec_mode: fork
+      script: npm
+      args:
+          - run
+          - dev
+      instances: 1
+      watch: false
+      autorestart: true
+      combine_logs: true

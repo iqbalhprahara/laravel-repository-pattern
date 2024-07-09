@@ -1,0 +1,64 @@
+grumphp:
+    process_timeout: 300
+    hide_circumvention_tip: true
+
+    fixer:
+        enabled: true
+        fix_by_default: true
+
+    stop_on_failure: false
+
+    extensions:
+      - YieldStudio\GrumPHPLaravelPint\ExtensionLoader
+
+    tasks:
+        composer: ~
+        git_commit_message:
+            allow_empty_message: false
+            enforce_capitalized_subject: false
+            enforce_no_subject_punctuations: false
+            enforce_no_subject_trailing_period: true
+            enforce_single_lined_subject: true
+            type_scope_conventions:
+                types:
+                    - build
+                    - ci
+                    - chore
+                    - docs
+                    - feat
+                    - fix
+                    - hotfix
+                    - perf
+                    - refactor
+                    - revert
+                    - style
+                    - test
+                scopes: []
+            max_body_width: 72
+            max_subject_width: 60
+            case_insensitive: true
+            multiline: true
+            additional_modifiers: ''
+        git_blacklist:
+            keywords:
+                - ' dd('
+                - 'dump('
+                - 'die;'
+                - 'exit;'
+        phplint:
+            exclude: []
+            jobs: ~
+            short_open_tag: false
+            ignore_patterns:
+              - /^app\/(.*)/
+              - /^config\/(.*)/
+              - /^routes\/(.*)/
+              - /^test\/(.*)/
+            triggered_by: ['php']
+        laravel_pint:
+          config: pint.json
+        pest:
+            config_file: ~
+            testsuite: ~
+            group: []
+            always_execute: false

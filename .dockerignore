@@ -1,0 +1,13 @@
+.devcontainer/
+.github/
+.git/
+boostrap/cache/*
+vendor/
+node_modules/
+public/build/
+
+storage/app/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
