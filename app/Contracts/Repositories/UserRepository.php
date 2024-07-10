@@ -7,14 +7,14 @@ use App\DataTransferObjects\UserData;
 interface UserRepository
 {
     /**
-     * Create new  user data to repository
+     * Create new  user data on repository
      *
      * @param UserData $userData data transfer object for user data
      */
     public function create(UserData $userData);
 
     /**
-     * Update current user data to repository
+     * Update current user data on repository
      *
      * @param UserData $userData data transfer object for user data
      */
