@@ -13,6 +13,9 @@ final class ApiRandomUserRepository implements RandomUserRepository
         protected RandomUser $connector,
     ) {}
 
+    /**
+     * {@inheritdoc}
+     */
     public function get(int $userCount = 20): Collection
     {
         return $this->connector->send(new GetRandomUser($userCount))->collect('results');

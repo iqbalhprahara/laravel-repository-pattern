@@ -9,14 +9,14 @@ interface UserRepository
     /**
      * Create new  user data on repository
      *
-     * @param UserData $userData data transfer object for user data
+     * @param  UserData  $userData  data transfer object for user data
      */
     public function create(UserData $userData);
 
     /**
      * Update current user data on repository
      *
-     * @param UserData $userData data transfer object for user data
+     * @param  UserData  $userData  data transfer object for user data
      */
     public function update(UserData $userData);
 

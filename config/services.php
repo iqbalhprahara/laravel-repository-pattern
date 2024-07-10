@@ -36,7 +36,7 @@ return [
     ],
 
     'random_user' => [
-        'url' => env("RANDOM_USER_URL", 'https://randomuser.me/api'),
+        'url' => env('RANDOM_USER_URL', 'https://randomuser.me/api'),
     ],
 
 ];

@@ -8,6 +8,9 @@ use App\Models\User;
 
 final class EloquentUserRepository implements UserRepository
 {
+    /**
+     * {@inheritdoc}
+     */
     public function create(UserData $userData): User
     {
         return User::create([
@@ -19,6 +22,9 @@ final class EloquentUserRepository implements UserRepository
         ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function update(UserData $userData): User
     {
         $user = User::findOrFail($userData->uuid);
@@ -35,6 +41,9 @@ final class EloquentUserRepository implements UserRepository
         return $user;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function uuidExists(string $uuid): bool
     {
         return User::where('uuid', $uuid)->exists();

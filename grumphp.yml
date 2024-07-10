@@ -9,7 +9,7 @@ grumphp:
     stop_on_failure: false
 
     extensions:
-      - YieldStudio\GrumPHPLaravelPint\ExtensionLoader
+        - YieldStudio\GrumPHPLaravelPint\ExtensionLoader
 
     tasks:
         composer: ~
@@ -38,27 +38,27 @@ grumphp:
             max_subject_width: 60
             case_insensitive: true
             multiline: true
-            additional_modifiers: ''
+            additional_modifiers: ""
         git_blacklist:
             keywords:
-                - ' dd('
-                - 'dump('
-                - 'die;'
-                - 'exit;'
+                - " dd("
+                - "dump("
+                - "die;"
+                - "exit;"
         phplint:
             exclude: []
             jobs: ~
             short_open_tag: false
             ignore_patterns:
-              - /^app\/(.*)/
-              - /^config\/(.*)/
-              - /^routes\/(.*)/
-              - /^test\/(.*)/
-            triggered_by: ['php']
+                - /^app\/(.*)/
+                - /^config\/(.*)/
+                - /^routes\/(.*)/
+                - /^test\/(.*)/
+            triggered_by: ["php"]
         laravel_pint:
-          config: pint.json
-        pest:
-            config_file: ~
-            testsuite: ~
-            group: []
-            always_execute: false
+            config: pint.json
+        # pest:
+        #     config_file: ~
+        #     testsuite: ~
+        #     group: []
+        #     always_execute: false

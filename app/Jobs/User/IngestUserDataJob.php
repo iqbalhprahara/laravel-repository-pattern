@@ -2,22 +2,27 @@
 
 namespace App\Jobs\User;
 
-use App\Actions\User\GenerateAndSaveUser;
+use App\Actions\User\IngestUserData;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
 
-class GenerateUser implements ShouldQueue
+class IngestUserDataJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public function __construct(
+        protected Carbon $timestamp
+    ) {}
 
     /**
      * Execute the job.
      */
-    public function handle(GenerateAndSaveUser $action): void
+    public function handle(IngestUserData $action): void
     {
-        $action->execute();
+        $action->execute($this->timestamp);
     }
 }

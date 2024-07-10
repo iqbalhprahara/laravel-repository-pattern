@@ -15,6 +15,7 @@ class Dashboard extends SimpleTablePage
     {
         $repository = resolve(RandomUserRepository::class);
         $repository->get();
+
         return $table
             ->headerActions([
                 Action::make('go-to-user-list')
