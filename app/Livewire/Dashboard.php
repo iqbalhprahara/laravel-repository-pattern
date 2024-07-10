@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Contracts\Livewire\SimpleTablePage;
-use App\Contracts\Repositories\RandomUserRepository;
 use App\Models\DailyRecord;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
@@ -13,9 +12,6 @@ class Dashboard extends SimpleTablePage
 {
     public function table(Table $table): Table
     {
-        $repository = resolve(RandomUserRepository::class);
-        $repository->get();
-
         return $table
             ->headerActions([
                 Action::make('go-to-user-list')
