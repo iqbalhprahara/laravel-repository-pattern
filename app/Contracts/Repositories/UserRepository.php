@@ -26,7 +26,7 @@ interface UserRepository
      *
      * @var string $uuid
      */
-    public function uuidExists(string $uuid): bool;
+    public function existsByUuid(string $uuid): bool;
 
     /**
      * Get average age of user created on certain date

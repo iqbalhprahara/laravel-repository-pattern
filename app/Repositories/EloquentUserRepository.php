@@ -45,7 +45,7 @@ final class EloquentUserRepository implements UserRepository
     /**
      * {@inheritdoc}
      */
-    public function uuidExists(string $uuid): bool
+    public function existsByUuid(string $uuid): bool
     {
         return User::where('uuid', $uuid)->exists();
     }

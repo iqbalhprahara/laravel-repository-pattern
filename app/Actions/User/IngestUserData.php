@@ -34,7 +34,7 @@ class IngestUserData
 
         // save each user
         foreach ($results as $userData) {
-            if (! $this->userRepository->uuidExists($userData->uuid)) {
+            if (! $this->userRepository->existsByUuid($userData->uuid)) {
                 // only new user will be counted to be saved as hourly record
                 if ($userData->gender == 'male') {
                     $maleCount++;
