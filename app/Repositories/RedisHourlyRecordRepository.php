@@ -4,33 +4,17 @@ namespace App\Repositories;
 
 use App\Contracts\Repositories\HourlyRecordRepository;
 use App\DataTransferObjects\HourlyRecordData;
-use Illuminate\Contracts\Redis\Factory as Redis;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
-final class RedisHourlyRecordRepository implements HourlyRecordRepository
+final class RedisHourlyRecordRepository extends RedisRepository implements HourlyRecordRepository
 {
     /**
-     * @var \Illuminate\Redis\Connections\Connection
+     * {@inheritdoc}
      */
-    protected $connection;
-
-    public const REDIS_KEY = 'hourly_data';
-
-    public function __construct(Redis $redis, string $connection = 'default')
+    protected function redisKey(): string
     {
-        $this->connection = $redis->connection($connection);
-    }
-
-    /**
-     * Execute a command on redis connection to the key store
-     */
-    protected function executeCommand($command, array $parameters)
-    {
-        return $this->connection->command($command, array_merge(
-            [self::REDIS_KEY],
-            $parameters,
-        ));
+        return 'hourly_record';
     }
 
     /**

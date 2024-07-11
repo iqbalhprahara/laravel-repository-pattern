@@ -7,17 +7,21 @@ use App\Http\Integrations\RandomUser\RandomUser;
 use App\Http\Integrations\RandomUser\Requests\GetRandomUser;
 use Illuminate\Support\Collection;
 
-final class ApiRandomUserRepository implements RandomUserRepository
+final class HttpRandomUserRepository extends HttpRepository implements RandomUserRepository
 {
-    public function __construct(
-        protected RandomUser $connector,
-    ) {}
+    /**
+     * {@inheritdoc}
+     */
+    protected function getConnectorClass(): string
+    {
+        return RandomUser::class;
+    }
 
     /**
      * {@inheritdoc}
      */
     public function get(int $userCount = 20): Collection
     {
-        return $this->connector->send(new GetRandomUser($userCount))->collect('results');
+        return $this->connector()->send(new GetRandomUser($userCount))->collect('results');
     }
 }

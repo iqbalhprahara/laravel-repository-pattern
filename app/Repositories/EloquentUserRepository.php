@@ -5,22 +5,32 @@ namespace App\Repositories;
 use App\Contracts\Repositories\UserRepository;
 use App\DataTransferObjects\UserData;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
-final class EloquentUserRepository implements UserRepository
+final class EloquentUserRepository extends EloquentRepository implements UserRepository
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function model(): Model
+    {
+        return new User;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function create(UserData $userData): User
     {
-        return User::create([
-            'uuid' => $userData->uuid,
-            'gender' => $userData->gender,
-            'name' => $userData->name,
-            'location' => $userData->location,
-            'age' => $userData->age,
-        ]);
+        return $this->model()
+            ->create([
+                'uuid' => $userData->uuid,
+                'gender' => $userData->gender,
+                'name' => $userData->name,
+                'location' => $userData->location,
+                'age' => $userData->age,
+            ]);
     }
 
     /**
@@ -57,7 +67,7 @@ final class EloquentUserRepository implements UserRepository
      */
     public function getByUuid(string $uuid): User
     {
-        return User::findOrFail($uuid);
+        return $this->model()->findOrFail($uuid);
     }
 
     /**
@@ -65,7 +75,7 @@ final class EloquentUserRepository implements UserRepository
      */
     public function existsByUuid(string $uuid): bool
     {
-        return User::where('uuid', $uuid)->exists();
+        return $this->model()->where('uuid', $uuid)->exists();
     }
 
     /**
@@ -76,7 +86,7 @@ final class EloquentUserRepository implements UserRepository
         $startOfDay = $date->clone()->startOfDay();
         $endOfDay = $date->clone()->endOfDay();
 
-        $averageAge = User::query()
+        $averageAge = $this->model()
             ->whereBetween('created_at', [$startOfDay, $endOfDay])
             ->when($gender, fn ($query) => $query->where('gender', $gender))
             ->avg('age');

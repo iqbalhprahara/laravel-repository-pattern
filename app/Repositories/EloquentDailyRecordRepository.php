@@ -5,20 +5,30 @@ namespace App\Repositories;
 use App\Contracts\Repositories\DailyRecordRepository;
 use App\DataTransferObjects\DailyRecordData;
 use App\Models\DailyRecord;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
-final class EloquentDailyRecordRepository implements DailyRecordRepository
+final class EloquentDailyRecordRepository extends EloquentRepository implements DailyRecordRepository
 {
+    /**
+     * {@inheritdoc}
+     */
+    protected function model(): Model
+    {
+        return new DailyRecord;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function create(DailyRecordData $dailyRecordData): DailyRecord
     {
-        return DailyRecord::create([
-            'date' => $dailyRecordData->date,
-            'male_count' => $dailyRecordData->maleCount,
-            'female_count' => $dailyRecordData->femaleCount,
-        ]);
+        return $this->model()
+            ->create([
+                'date' => $dailyRecordData->date,
+                'male_count' => $dailyRecordData->maleCount,
+                'female_count' => $dailyRecordData->femaleCount,
+            ]);
     }
 
     /**
@@ -26,7 +36,8 @@ final class EloquentDailyRecordRepository implements DailyRecordRepository
      */
     public function getByDate(Carbon $date, bool $lockForUpdate = false): DailyRecord
     {
-        return DailyRecord::where('date', $date)
+        return $this->model()
+            ->where('date', $date)
             ->when($lockForUpdate, fn ($query) => $query->lockForUpdate())
             ->firstOrFail();
     }
@@ -36,7 +47,7 @@ final class EloquentDailyRecordRepository implements DailyRecordRepository
      */
     public function existsByDate(Carbon $date): bool
     {
-        return DailyRecord::where('date', $date)->exists();
+        return $this->model()->where('date', $date)->exists();
     }
 
     /**
