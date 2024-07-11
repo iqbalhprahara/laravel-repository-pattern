@@ -1,10 +1,6 @@
-
 # Simple User Counter
 
-A simple user data processing application implementing repository pattern for data layer.
-
-
-
+A simple user data processing implementation using data transfer object as a communication contract, action as business logic layer, and repository as data infrastructure layer.
 
 ## Tech Stack
 
@@ -13,7 +9,6 @@ A simple user data processing application implementing repository pattern for da
 **Server:** Docker, Laravel 11 (PHP 8.3), Swoole, Laravel Octane, Laravel Horizon, Laravel Livewire, Laravel Filament, PM2
 
 **Database:** Postgresql 16, Redis 7.2
-
 
 ## Installation
 
@@ -24,12 +19,10 @@ First install docker in your device
 
 https://docs.docker.com/engine/install/
 
-
 and install gnu make command on your os
 
-
 Copy `.env.example` to `.env`
-and then run 
+and then run
 
 ```bash
   make build
@@ -38,6 +31,7 @@ and then run
 to build docker image for this project
 
 then run
+
 ```bash
     make setup
 ```
@@ -45,6 +39,7 @@ then run
 to setup dependencies for project
 
 then run
+
 ```bash
     make up
 ```
