@@ -18,4 +18,9 @@ abstract class SimpleTablePage extends SimplePage implements HasTable
     {
         return MaxWidth::SevenExtraLarge;
     }
+
+    public function getMaxContentWidth(): MaxWidth|string|null
+    {
+        return MaxWidth::SevenExtraLarge;
+    }
 }
