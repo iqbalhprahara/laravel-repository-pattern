@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Actions\User\DeleteUserByUuid;
-use App\Contracts\Livewire\SimpleTablePage;
 use App\Models\User;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Actions\Action;

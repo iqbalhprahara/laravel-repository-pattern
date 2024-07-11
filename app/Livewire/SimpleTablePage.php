@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts\Livewire;
+namespace App\Livewire;
 
 use Filament\Actions\Concerns\CanNotify;
 use Filament\Pages\SimplePage;

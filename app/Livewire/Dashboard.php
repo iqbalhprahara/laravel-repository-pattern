@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Contracts\Livewire\SimpleTablePage;
 use App\Models\DailyRecord;
 use Carbon\CarbonImmutable;
 use Filament\Tables\Actions\Action;
