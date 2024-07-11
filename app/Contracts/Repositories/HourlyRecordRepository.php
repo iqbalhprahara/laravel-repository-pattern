@@ -19,6 +19,7 @@ interface HourlyRecordRepository
      * Find all hourly records by date specified in argument
      *
      * @param  Carbon  $date  date of the records
+     * @return Collection<HourlyRecordData>
      */
     public function findAllByDate(Carbon $date): Collection;
 

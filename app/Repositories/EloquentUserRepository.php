@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Contracts\Repositories\UserRepository;
 use App\DataTransferObjects\UserData;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 
 final class EloquentUserRepository implements UserRepository
 {
@@ -47,5 +48,21 @@ final class EloquentUserRepository implements UserRepository
     public function uuidExists(string $uuid): bool
     {
         return User::where('uuid', $uuid)->exists();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAverageAgeByDate(Carbon $date, ?string $gender = null): int
+    {
+        $startOfDay = $date->clone()->startOfDay();
+        $endOfDay = $date->clone()->endOfDay();
+
+        $averageAge = User::query()
+            ->whereBetween('created_at', [$startOfDay, $endOfDay])
+            ->when($gender, fn ($query) => $query->where('gender', $gender))
+            ->avg('age');
+
+        return round($averageAge);
     }
 }

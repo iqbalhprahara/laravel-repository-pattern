@@ -16,6 +16,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(Contracts\Repositories\RandomUserRepository::class, Repositories\ApiRandomUserRepository::class);
         $this->app->singleton(Contracts\Repositories\UserRepository::class, Repositories\EloquentUserRepository::class);
         $this->app->singleton(Contracts\Repositories\HourlyRecordRepository::class, Repositories\RedisHourlyRecordRepository::class);
+        $this->app->singleton(Contracts\Repositories\DailyRecordRepository::class, Repositories\EloquentDailyRecordRepository::class);
     }
 
     /**
