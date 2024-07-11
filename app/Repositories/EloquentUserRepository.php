@@ -28,7 +28,7 @@ final class EloquentUserRepository implements UserRepository
      */
     public function update(UserData $userData): User
     {
-        $user = User::findOrFail($userData->uuid);
+        $user = $this->getByUuid($userData->uuid);
 
         $user->fill([
             'gender' => $userData->gender,
@@ -40,6 +40,24 @@ final class EloquentUserRepository implements UserRepository
         $user->save();
 
         return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete(string $uuid): bool
+    {
+        $user = $this->getByUuid($uuid);
+
+        return $user->delete();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getByUuid(string $uuid): User
+    {
+        return User::findOrFail($uuid);
     }
 
     /**

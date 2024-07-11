@@ -22,6 +22,20 @@ interface UserRepository
     public function update(UserData $userData);
 
     /**
+     * Delete user on repository by uuid
+     *
+     * @param  string  $uuid  the uuid of the user
+     */
+    public function delete(string $uuid): bool;
+
+    /**
+     * Get user by uuid
+     *
+     * @param  string  $uuid  the uuid of te user
+     */
+    public function getByUuid(string $uuid);
+
+    /**
      * Check if uuid already exists on repository
      *
      * @var string $uuid

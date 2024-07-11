@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use App\Observers\DailyRecord\FemaleCountObserver;
-use App\Observers\DailyRecord\MaleCountObserver;
+use App\Observers\DailyRecord\GenderCountObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[
     ObservedBy([
-        MaleCountObserver::class,
-        FemaleCountObserver::class,
+        GenderCountObserver::class,
     ])
 ]
 class DailyRecord extends Model
