@@ -17,9 +17,6 @@ ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/relea
 RUN install-php-extensions pdo_pgsql \
     swoole-5.1.1 \
     pcntl \
-    gd \
-    imagick/imagick@master \
-    exif \
     bcmath \
     redis \
     intl \

@@ -26,11 +26,15 @@ error:
 #############################
 .PHONY: build
 build: error ## Build docker stack
+	$(DOCKER_COMPOSE) build
+
+.PHONY: build-no-cache
+build-no-cache: error ## Build docker stack without cache
 	$(DOCKER_COMPOSE) build --no-cache
 
 .PHONY: up
 up: error ## Start docker stack
-	$(DOCKER_COMPOSE) up -d --build --force-recreate --remove-orphans
+	$(DOCKER_COMPOSE) up -d --force-recreate --remove-orphans
 
 .PHONY: down
 down: error ## Stop and remove docker stack
@@ -69,6 +73,11 @@ connect-app: error # connect to app container terminal
 ############################
 # PROJECT SPESIFIC COMMAND #
 ############################
+.PHONY: setup
+setup: error
+	$(DOCKER_COMPOSE) run --rm --entrypoint="" app $(MAKE) setup-in-docker
+	$(DOCKER_COMPOSE) down
+
 .PHONY: composer-install-dev
 composer-install-dev: error
 	$(DOCKER_EXEC) app composer install || true
@@ -128,6 +137,13 @@ start-dev-docker: error # executing inside container from host
 #############
 # UTILITIES #
 #############
+.PHONY: setup-in-docker
+setup-in-docker:
+	composer install --no-interaction
+	php artisan key:generate || true
+	php artisan migrate:fresh --seed
+	npm install
+
 .PHONY: list
 list:
 	@LC_ALL=C $(MAKE) -pRrq -f $(firstword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/(^|\n)# Files(\n|$$)/,/(^|\n)# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | grep -E -v -e '^[^[:alnum:]]' -e '^$@$$'
