@@ -12,6 +12,12 @@ class RandomUser extends Connector
 {
     use AcceptsJson, AlwaysThrowOnErrors;
 
+    public ?int $tries = 5;
+
+    public ?int $retryInterval = 500;
+
+    public ?bool $useExponentialBackoff = true;
+
     protected function defaultSender(): Sender
     {
         return resolve(GuzzleSender::class);
