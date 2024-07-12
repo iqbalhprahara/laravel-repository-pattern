@@ -36,6 +36,7 @@ class User extends Model
         'name',
         'location',
         'age',
+        'created_at',
     ];
 
     protected $casts = [

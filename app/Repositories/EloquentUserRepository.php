@@ -30,6 +30,7 @@ final class EloquentUserRepository extends EloquentRepository implements UserRep
                 'name' => $userData->name,
                 'location' => $userData->location,
                 'age' => $userData->age,
+                'created_at' => $userData->createdAt,
             ]);
     }
 

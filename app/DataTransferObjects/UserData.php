@@ -2,17 +2,20 @@
 
 namespace App\DataTransferObjects;
 
-class UserData
+use Illuminate\Support\Carbon;
+
+readonly class UserData
 {
     public function __construct(
-        public readonly string $uuid,
-        public readonly string $gender,
-        public readonly array $name,
-        public readonly array $location,
-        public readonly int $age,
+        public string $uuid,
+        public string $gender,
+        public array $name,
+        public array $location,
+        public int $age,
+        public ?Carbon $createdAt = null,
     ) {}
 
-    public static function fromRandomUserData(array $data)
+    public static function fromRandomUserData(array $data, ?Carbon $createdAt = null)
     {
         return new static(
             uuid: $data['login']['uuid'],
@@ -20,6 +23,7 @@ class UserData
             name: $data['name'],
             location: $data['location'],
             age: $data['dob']['age'],
+            createdAt: $createdAt,
         );
     }
 }

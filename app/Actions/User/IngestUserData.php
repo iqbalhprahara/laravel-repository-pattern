@@ -27,8 +27,7 @@ class IngestUserData
 
     public function execute(Carbon $timestamp, int $ingestCount = self::DEFAULT_INGEST_COUNT)
     {
-        $results = $this->generateUser($ingestCount);
-
+        $results = $this->generateUser($ingestCount, $timestamp);
         $maleCount = 0;
         $femaleCount = 0;
 
@@ -59,9 +58,9 @@ class IngestUserData
      *
      * @return Collection<UserData>
      */
-    protected function generateUser(int $ingestCount): Collection
+    protected function generateUser(int $ingestCount, Carbon $timestamp): Collection
     {
         return $this->randomUserRepository->get($ingestCount)
-            ->map(fn ($randomUserData): UserData => UserData::fromRandomUserData($randomUserData));
+            ->map(fn ($randomUserData): UserData => UserData::fromRandomUserData($randomUserData, $timestamp));
     }
 }

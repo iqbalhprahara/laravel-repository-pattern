@@ -4,11 +4,11 @@ namespace App\DataTransferObjects;
 
 use Illuminate\Support\Carbon;
 
-class DailyRecordData
+readonly class DailyRecordData
 {
     public function __construct(
-        public readonly Carbon $date,
-        public readonly int $maleCount,
-        public readonly int $femaleCount,
+        public Carbon $date,
+        public int $maleCount,
+        public int $femaleCount,
     ) {}
 }
