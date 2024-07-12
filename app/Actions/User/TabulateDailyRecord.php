@@ -21,7 +21,7 @@ class TabulateDailyRecord
         protected DailyRecordRepository $dailyRecordRepository,
     ) {}
 
-    public function execute(Carbon $date, bool $deleteHourlyData = false)
+    public function execute(Carbon $date, bool $deleteHourlyData = true)
     {
         $hourlyRecords = $this->hourlyRecordRepository->findAllByDate($date);
 
